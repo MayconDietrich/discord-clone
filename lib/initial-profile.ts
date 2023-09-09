@@ -1,5 +1,5 @@
 import { currentUser, redirectToSignIn } from "@clerk/nextjs";
-import { db } from "./db";
+import { db } from "@/lib/db";
 
 export const initialProfile = async () => {
   const user = await currentUser();
@@ -26,5 +26,5 @@ export const initialProfile = async () => {
     }
   });
 
-  return newProfile;
-}
+  return [];
+};
