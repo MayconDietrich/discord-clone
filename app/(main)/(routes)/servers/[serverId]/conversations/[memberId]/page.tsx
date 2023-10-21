@@ -7,6 +7,7 @@ import { currentProfile } from "@/lib/current-profile";
 import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatMessages } from "@/components/chat/chat-messages";
 import { ChatInput } from "@/components/chat/chat-input";
+import { MediaRoom } from "@/components/media-room";
 
 interface MemberIdPageProps {
   params: {
@@ -52,7 +53,7 @@ const MemberIdPage = async ({
 
   const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne;
 
-  return ( 
+  return (
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
       <ChatHeader
         imageUrl={otherMember.profile.imageUrl}
@@ -60,6 +61,13 @@ const MemberIdPage = async ({
         serverId={params.serverId}
         type="conversation"
       />
+      {searchParams.video && (
+        <MediaRoom
+          chatId={conversation.id}
+          video={true}
+          audio={true}
+        />
+      )}
       {!searchParams.video && (
         <>
           <ChatMessages
@@ -86,7 +94,7 @@ const MemberIdPage = async ({
         </>
       )}
     </div>
-   );
+  );
 }
- 
+
 export default MemberIdPage;
