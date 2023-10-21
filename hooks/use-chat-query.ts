@@ -8,13 +8,13 @@ interface ChatQueryProps {
   apiUrl: string;
   paramKey: "channelId" | "conversationId";
   paramValue: string;
-}
+};
 
 export const useChatQuery = ({
   queryKey,
   apiUrl,
   paramKey,
-  paramValue,
+  paramValue
 }: ChatQueryProps) => {
   const { isConnected } = useSocket();
 
@@ -41,7 +41,7 @@ export const useChatQuery = ({
     queryKey: [queryKey],
     queryFn: fetchMessages,
     getNextPageParam: (lastPage) => lastPage?.nextCursor,
-    refetchInterval: isConnected ? false : 1000
+    refetchInterval: isConnected ? false : 1000,
   });
 
   return {
