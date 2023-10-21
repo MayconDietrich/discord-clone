@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useModal } from "@/hooks/use-modal-stores";
 
 interface ChatItemProps {
   id: string;
@@ -61,6 +62,7 @@ export const ChatItem = ({
   socketQuery
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const { onOpen } = useModal();
   const params = useParams();
   const router = useRouter();
 
@@ -232,6 +234,10 @@ export const ChatItem = ({
           )}
           <ActionTooltip label="Delete">
             <Trash
+              onClick={() => onOpen("deleteMessage", {
+                apiUrl: `${socketUrl}/${id}`,
+                query: socketQuery,
+              })}
               className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
             />
           </ActionTooltip>
